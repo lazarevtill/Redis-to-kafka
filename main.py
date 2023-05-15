@@ -92,19 +92,19 @@ def upload_s3_object(object_key):
 
 # Check if the file path exists
 def check_path_to_file(upload_type_from_redis):
-    # if file_path:
-    #     # Decode the file path from bytes to string
-    #     file_path = file_path.decode()
-    #
-    #     # Check if the file exists
-    #     if os.path.exists(file_path):
-    #         # Upload the file to Kafka topic
-    #         upload_to_kafka(file_path)
-    #         print("File upload started.")
-    #     else:
-    #         print("File not found.")
-    # else:
-    #     print("File path not found in Redis.")
+    if file_path:
+        # Decode the file path from bytes to string
+        file_path = file_path.decode()
+
+        # Check if the file exists
+        if os.path.exists(file_path):
+            # Upload the file to Kafka topic
+            upload_to_kafka(file_path)
+            print("File upload started.")
+        else:
+            print("File not found.")
+    else:
+        print("File path not found in Redis.")
 
     if upload_type_from_redis:
         upload_type = upload_type_from_redis.decode()
@@ -138,9 +138,9 @@ def check_path_to_file(upload_type_from_redis):
 
         elif upload_type == 'web':
             # Get web links from Redis
-            web_links_ = redis_client.lrange('web_links', 0, -1)
-        if web_links_:
-            for web_link in web_links_:
+            web_links = redis_client.lrange('web_links', 0, -1)
+        if web_links:
+            for web_link in web_links:
                 web_link = web_link.decode()
                 upload_web_link(web_link)
                 print("Web link content uploaded successfully:", web_link)
