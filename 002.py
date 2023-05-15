@@ -1,5 +1,5 @@
 import sys
-
+from confluent_kafka import Producer
 import kafka
 import os
 import redis
@@ -9,6 +9,11 @@ import requests
 # Kafka configuration
 bootstrap_servers = os.getenv('KAFKA_BOOTSTRAP_SERVERS', 'localhost:9092')
 topic_name = 'upload'
+
+# bootstrap_servers = 'localhost:9092'
+topic = 'upload'
+# file_path = '/path/to/my/file.txt'
+
 
 # Redis configuration
 redis_host = os.getenv('REDIS_HOST', 'localhost')
@@ -33,7 +38,6 @@ def upload_to_kafka(content):
 
     # Close Kafka producer
     producer.close()
-
 
 # Function to upload file to Kafka topic
 def upload_file(file_path):
