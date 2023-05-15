@@ -1,5 +1,4 @@
 import sys
-
 import redis
 import threading
 
@@ -13,9 +12,6 @@ def listen_for_new_items():
 
     # Subscribe to a channel
     pubsub.subscribe('upload')
-
-    # Start listening for new messages in a separate thread
-    # thread = pubsub.run_in_thread(sleep_time=0.001)
 
     # Process incoming messages
     for message in pubsub.listen():
