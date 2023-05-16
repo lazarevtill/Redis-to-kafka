@@ -1,6 +1,7 @@
 import requests
 from confluent_kafka import Producer
 
+
 def upload_web_content_to_kafka(bootstrap_servers, topic, web_link):
     # Create Kafka producer configuration
     producer_config = {
@@ -38,6 +39,7 @@ def upload_web_content_to_kafka(bootstrap_servers, topic, web_link):
     producer.flush(timeout=5)
     producer.poll(10)
     producer.flush()
+
 
 # Usage example
 bootstrap_servers = 'localhost:9092'
