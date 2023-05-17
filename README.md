@@ -5,15 +5,16 @@ This simple code gets url from Redis and uploads content from it to a Kafka "Upl
 The Script "publish_to_redis.py" was written for testing needs (check that all ideas work)
 # Usage
 
-For use (play with) this code you need to use "docker-compose.yaml" to set up Redis and Kafka (the simplest instances) \
+For use (play with) this code you need to build docker image for service and use "docker-compose.yaml" to set up Redis and Kafka (the simplest instances) with "redis-to-kafka" microservice\
+#### Build docker image from Dockerfile 
+```
+docker build -t redis-to-kafka . 
+```
+#### Run everything together 
 ``` 
 docker compose up -d 
 ```
-And build docker image from Dockerfile, run it 
-```
-docker build -t redis-to-kafka . 
-docker run redis-to-kafka -d
-```
+
 After that, you can run "publish_to_redis.py" to easily send sth to redis and check the service is working
 
 ```
